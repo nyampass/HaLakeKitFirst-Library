@@ -50,6 +50,7 @@ void HaLakeKitFirstConnector::clearSerialBuffer() {
 String HaLakeKitFirstConnector::waitLine(bool clearBuffer) {
   unsigned long waitTill = millis() + breakMillis;
   String receivedStr;
+  char receivedChar;
 
   if (!clearBuffer) {
     clearSerialBuffer();
@@ -57,8 +58,13 @@ String HaLakeKitFirstConnector::waitLine(bool clearBuffer) {
 
   while (receivedStr.length() == 0 && waitTill > millis()) {
     while (hardSerial->available() > 0) {
-      receivedStr.concat((char)hardSerial->read());
-      delay(2);
+      receivedChar = (char)hardSerial->read();
+      if (receivedChar == "\n") {
+        break;
+      } else {
+        receivedStr.concat(receivedChar);
+        delay(2);
+      }
     }
   }
 
@@ -68,5 +74,6 @@ String HaLakeKitFirstConnector::waitLine(bool clearBuffer) {
     receivedStr.remove(lastCharIndex);
     lastCharIndex --;
   }
+
   return receivedStr;
 }
