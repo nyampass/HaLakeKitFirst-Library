@@ -46,6 +46,6 @@ void loop() {
   }
 
   kitConnector.sendValue(targetValue);
-  delay(20);
+  delay(30);
 }
 
