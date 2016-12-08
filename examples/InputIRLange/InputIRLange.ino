@@ -29,7 +29,7 @@ void loop() {
   //sensorCm = partValueToCm(sensorValue);
   //outValue = map(sensorCm, 5, 30, 0, 1023);
 
-  outValue = map(sensorValue, 100, 600, 1023, 0);
+  outValue = map(sensorValue, 100, 400, 0, 1023);
   if (outValue < 0) {
     outValue = 0;
   } else if (outValue > 1023) {
