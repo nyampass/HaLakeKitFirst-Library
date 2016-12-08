@@ -23,8 +23,7 @@ void loop() {
       servo.attach(SERVO_PIN);
     }
     // 1500 is middle
-    // 700 to 2300
-    microSec = (receivedValue * 1.6) + 700;
+    microSec = map(receivedValue, 0, 1023, 600, 2400);
     servo.writeMicroseconds(microSec);
   } else {
     servo.detach();
