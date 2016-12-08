@@ -18,14 +18,14 @@ void loop() {
   receivedLine = kitConnector.waitLine();
   receivedValue = kitConnector.valueFromLine(receivedLine);
 
-  if (receivedValue > 0) {
+  if (receivedValue < 0) {
+    servo.detach();
+  } else {
     if (!servo.attached()) {
       servo.attach(SERVO_PIN);
     }
     // 1500 is middle
     microSec = map(receivedValue, 0, 1023, 600, 2400);
     servo.writeMicroseconds(microSec);
-  } else {
-    servo.detach();
   }
 }
