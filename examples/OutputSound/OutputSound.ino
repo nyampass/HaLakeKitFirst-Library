@@ -3,7 +3,7 @@
 
 // https://www.arduino.cc/en/Reference/Tone
 #define MIN_FREQUENCY 100
-#define MAX_FREQUENCY 1500
+#define MAX_FREQUENCY 1000
 
 HaLakeKitFirstConnector kitConnector(&Serial);
 
