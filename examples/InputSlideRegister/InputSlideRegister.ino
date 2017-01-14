@@ -22,5 +22,5 @@ void loop() {
 
   kitConnector.sendValue(outValue);
 
-  delay(20);
+  delay(50);
 }
