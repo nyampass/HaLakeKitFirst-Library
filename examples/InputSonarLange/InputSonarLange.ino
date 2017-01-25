@@ -3,7 +3,11 @@
 #define TRIG_PIN 2
 #define ECHO_PIN 3
 
+#ifdef USBCON
+HaLakeKitFirstConnector kitConnector(&Serial1);
+#else
 HaLakeKitFirstConnector kitConnector(&Serial);
+#endif
 
 int sensorValue;
 int outValue;
