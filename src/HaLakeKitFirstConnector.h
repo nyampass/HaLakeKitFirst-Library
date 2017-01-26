@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 #define HALAKEKITFIRST_BREAK_MILLIS 1000
-#define HALAKEKITFIRST_SERIAL_SPEED 9600
+#define HALAKEKITFIRST_SERIAL_SPEED 115200
 
 class HaLakeKitFirstConnector {
   public:
