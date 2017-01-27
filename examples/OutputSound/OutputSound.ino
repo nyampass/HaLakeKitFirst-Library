@@ -1,11 +1,11 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 #define SPEAKER_PIN 9
 
 // https://www.arduino.cc/en/Reference/Tone
 #define MIN_FREQUENCY 100
 #define MAX_FREQUENCY 1000
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 String kitStr;
 int receivedValue;

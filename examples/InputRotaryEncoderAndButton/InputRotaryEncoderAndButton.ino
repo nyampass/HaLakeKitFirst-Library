@@ -1,10 +1,10 @@
-#include <HaLakeKitFirstConnector.h>
+#include <HaLakeKitFirst.h>
 #include <MsTimer2.h>
 #define ROTERY_PIN_A 10
 #define ROTERY_PIN_B 9
 #define SWITCH_PIN 8
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 volatile int roteryValue;
 

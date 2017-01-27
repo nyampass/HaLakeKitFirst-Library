@@ -1,9 +1,9 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 #include <Servo.h>
 
 #define ANALOG_READ_POWER_PIN 7
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 int powerValue;
 int outValue;

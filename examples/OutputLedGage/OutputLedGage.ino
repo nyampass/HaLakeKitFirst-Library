@@ -1,4 +1,4 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 
 #define MAX_LEVEL 9 // 0 to 9
 
@@ -19,7 +19,7 @@ int currentLevel = 0;
 int targetLevel;
 int i;
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 String kitStr;
 int receivedValue;

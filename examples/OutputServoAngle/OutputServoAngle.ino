@@ -1,9 +1,9 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 #include <Servo.h>
 
 #define SERVO_PIN 10
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 Servo servo;
 String receivedLine;

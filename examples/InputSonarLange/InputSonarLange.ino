@@ -1,12 +1,12 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 
 #define TRIG_PIN 2
 #define ECHO_PIN 3
 
 #ifdef USBCON
-HaLakeKitFirstConnector kitConnector(&Serial1);
+HaLakeKitFirst kitConnector(&Serial1);
 #else
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 #endif
 
 int sensorValue;

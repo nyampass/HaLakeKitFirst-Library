@@ -1,8 +1,8 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 
 #define SENSOR_PIN 0
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 int sensorValue;
 int outValue;

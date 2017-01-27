@@ -1,11 +1,11 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 #include "PushButton.h"
 
 #define UP_BUTTON_PIN 2
 #define DOWN_BUTTON_PIN A0
 #define MAX_VALUE 1023
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 int targetValue = 0;
 PushButton upButton(UP_BUTTON_PIN, LOW);

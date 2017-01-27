@@ -1,10 +1,10 @@
-#include "HaLakeKitFirstConnector.h"
+#include "HaLakeKitFirst.h"
 #define ANALOG_READ_PIN 7
 
 int receivedValue;
 int outValue;
 
-HaLakeKitFirstConnector kitConnector(&Serial);
+HaLakeKitFirst kitConnector(&Serial);
 
 void setup() {
   kitConnector.begin();

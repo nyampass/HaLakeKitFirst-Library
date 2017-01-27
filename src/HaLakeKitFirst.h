@@ -1,14 +1,14 @@
-#ifndef HaLakeKitFirstConnector_h
-#define HaLakeKitFirstConnector_h
+#ifndef HaLakeKitFirst_h
+#define HaLakeKitFirst_h
 
 #include <Arduino.h>
 
 #define HALAKEKITFIRST_BREAK_MILLIS 1000
 #define HALAKEKITFIRST_SERIAL_SPEED 115200
 
-class HaLakeKitFirstConnector {
+class HaLakeKitFirst {
   public:
-  HaLakeKitFirstConnector(HardwareSerial* _hardSerial);
+  HaLakeKitFirst(HardwareSerial* _hardSerial);
   void begin();
   void setBreakMillis(unsigned long _breakMillis);
   void sendValue(int value);
