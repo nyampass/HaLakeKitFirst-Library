@@ -17,7 +17,7 @@ void setup() {
 void loop() {
   if (kitFirst.receive()) {
     soundFrequency =
-      kitFirst.getReceivedValueInRange(MIN_FREQUENCY,
+      kitFirst.getReceivedValue(MIN_FREQUENCY,
                                        MAX_FREQUENCY);
   } else {
     soundFrequency = 0;

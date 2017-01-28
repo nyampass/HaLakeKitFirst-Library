@@ -20,7 +20,7 @@ void HaLakeKitFirst::begin() {
   hardSerial->begin(HALAKEKITFIRST_SERIAL_SPEED);
 }
 
-long HaLakeKitFirst::sendValueInRange(long value, long min, long max) {
+long HaLakeKitFirst::sendValue(long value, long min, long max) {
   long valueToSend = constrainAndMap(value,
                                      min,
                                      max,
@@ -32,7 +32,7 @@ long HaLakeKitFirst::sendValueInRange(long value, long min, long max) {
   return valueToSend;
 }
 
-long HaLakeKitFirst::getReceivedValueInRange(long min, long max) {
+long HaLakeKitFirst::getReceivedValue(long min, long max) {
   int spaceIndex = receivedString.indexOf(' ');
   String command = receivedString.substring(0, spaceIndex);
   if (command != "v") {

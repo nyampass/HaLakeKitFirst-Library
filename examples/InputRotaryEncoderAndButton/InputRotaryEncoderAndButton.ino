@@ -44,7 +44,7 @@ void loop(void) {
     valueToSend --;
   }
 
-  valueToSend = kitFirst.sendValueInRange(valueToSend, 0, HALAKEKITFIRST_MAX_VALUE);
+  valueToSend = kitFirst.sendValue(valueToSend, 0, HALAKEKITFIRST_MAX_VALUE);
   delay(50);
 }
 

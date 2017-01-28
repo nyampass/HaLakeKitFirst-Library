@@ -13,8 +13,8 @@ class HaLakeKitFirst {
   void begin();
   bool receive(unsigned long breakMillis = (unsigned long) HALAKEKITFIRST_BREAK_MILLIS,
                bool clearBuffer = true);
-  long sendValueInRange(long value, long min, long max);
-  long getReceivedValueInRange(long min, long max);
+  long sendValue(long value, long min, long max);
+  long getReceivedValue(long min, long max);
   String getReceivedString();
   void clearSerialBuffer();
 

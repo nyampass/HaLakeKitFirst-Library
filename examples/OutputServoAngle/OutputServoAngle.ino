@@ -20,7 +20,7 @@ void loop() {
       servo.attach(SERVO_PIN);
     }
     microSec =
-      kitFirst.getReceivedValueInRange(SERVO_MIN_MICROSEC,
+      kitFirst.getReceivedValue(SERVO_MIN_MICROSEC,
                                        SERVO_MAX_MICROSEC);
     servo.writeMicroseconds(microSec);
   } else {

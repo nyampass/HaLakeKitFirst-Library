@@ -12,7 +12,7 @@ void setup() {
 
 void loop() {
   if (kitFirst.receive()) {
-    outValue = kitFirst.getReceivedValueInRange(0, 255);
+    outValue = kitFirst.getReceivedValue(0, 255);
   } else {
     outValue = 0;
   }

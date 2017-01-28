@@ -39,7 +39,7 @@ void loop() {
     downButton.freeState = 0;
   }
 
-  targetValue = kitFirst.sendValueInRange(targetValue, 0, HALAKEKITFIRST_MAX_VALUE);
+  targetValue = kitFirst.sendValue(targetValue, 0, HALAKEKITFIRST_MAX_VALUE);
   delay(30);
 }
 

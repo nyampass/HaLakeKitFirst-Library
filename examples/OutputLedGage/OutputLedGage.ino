@@ -32,7 +32,7 @@ void setup() {
 
 void loop() {
   if (kitFirst.receive()) {
-    targetLevel = kitFirst.getReceivedValueInRange(0, MAX_LEVEL);
+    targetLevel = kitFirst.getReceivedValue(0, MAX_LEVEL);
   }
 
   if (currentLevel != targetLevel) {

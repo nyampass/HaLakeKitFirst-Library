@@ -25,7 +25,7 @@ void loop() {
   sensorValue = sumSensorValue / sumupNumberOfTimes;
   sumSensorValue = 0;
 
-  kitFirst.sendValueInRange(sensorValue, 100, 400);
+  kitFirst.sendValue(sensorValue, 100, 400);
 }
 
 int partValueToCm(int value) {

@@ -11,8 +11,8 @@ void setup() {
 }
 
 void loop() {
-  kitFirst.sendValueInRange(analogRead(ANALOG_READ_POWER_PIN),
-                            500,
-                            1023);
+  kitFirst.sendValue(analogRead(ANALOG_READ_POWER_PIN),
+                     500,
+                     1023);
   delay(20);
 }

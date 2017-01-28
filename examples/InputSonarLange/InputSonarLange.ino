@@ -38,7 +38,7 @@ void loop() {
   } else if (outValue > 1023) {
     outValue = 1023;
   }
-  kitFirst.sendValueInRange(sensorValue, 60, 10);
+  kitFirst.sendValue(sensorValue, 60, 10);
 }
 
 float getSonarDistance() {
