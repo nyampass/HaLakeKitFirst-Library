@@ -88,3 +88,7 @@ String HaLakeKitFirst::waitLine(unsigned long breakMillis) {
 
   return receivedStr;
 }
+
+String HaLakeKitFirst::getReceivedString() {
+  return receivedString;
+}
