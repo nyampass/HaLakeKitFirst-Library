@@ -5,26 +5,22 @@
 #define MIN_FREQUENCY 100
 #define MAX_FREQUENCY 1000
 
-HaLakeKitFirst kitConnector(&Serial);
-
-String kitStr;
-int receivedValue;
+HaLakeKitFirst kitFirst(&Serial);
 
 int soundFrequency;
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
   pinMode(SPEAKER_PIN, OUTPUT);
 }
 
 void loop() {
-  kitStr = kitConnector.waitLine();
-  receivedValue = kitConnector.valueFromLine(kitStr);
-
-  if (receivedValue < 0) {
-    soundFrequency = 0;
+  if (kitFirst.receive()) {
+    soundFrequency =
+      kitFirst.getReceivedValueInRange(MIN_FREQUENCY,
+                                       MAX_FREQUENCY);
   } else {
-    soundFrequency = map(receivedValue, 0, 1023, MIN_FREQUENCY, MAX_FREQUENCY);
+    soundFrequency = 0;
   }
 
   tone(SPEAKER_PIN, soundFrequency, 100);

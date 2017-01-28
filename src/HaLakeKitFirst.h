@@ -5,21 +5,23 @@
 
 #define HALAKEKITFIRST_BREAK_MILLIS 1000
 #define HALAKEKITFIRST_SERIAL_SPEED 115200
+#define HALAKEKITFIRST_MAX_VALUE 1023
 
 class HaLakeKitFirst {
   public:
   HaLakeKitFirst(HardwareSerial* _hardSerial);
   void begin();
-  void setBreakMillis(unsigned long _breakMillis);
-  void sendValue(int value);
+  bool receive(unsigned long breakMillis = (unsigned long) HALAKEKITFIRST_BREAK_MILLIS,
+               bool clearBuffer = true);
+  long sendValueInRange(long value, long min, long max);
+  long getReceivedValueInRange(long min, long max);
+  String getReceivedString();
   void clearSerialBuffer();
-  String waitLine(bool clearBuffer = true);
-
-  static int valueFromLine(String line);
 
   private:
+  String waitLine(unsigned long breakMillis);
   HardwareSerial* hardSerial;
-  unsigned long breakMillis;
+  String receivedString;
 };
 
 #endif

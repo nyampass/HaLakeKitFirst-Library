@@ -2,30 +2,28 @@
 #include <Servo.h>
 
 #define SERVO_PIN 10
+#define SERVO_MIN_MICROSEC 600
+#define SERVO_MAX_MICROSEC 2400
 
-HaLakeKitFirst kitConnector(&Serial);
+HaLakeKitFirst kitFirst(&Serial);
 
 Servo servo;
-String receivedLine;
-int receivedValue;
 int microSec;
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
 }
 
 void loop() {
-  receivedLine = kitConnector.waitLine();
-  receivedValue = kitConnector.valueFromLine(receivedLine);
-
-  if (receivedValue < 0) {
-    servo.detach();
-  } else {
+  if (kitFirst.receive()) {
     if (!servo.attached()) {
       servo.attach(SERVO_PIN);
     }
-    // 1500 is middle
-    microSec = map(receivedValue, 0, 1023, 600, 2400);
+    microSec =
+      kitFirst.getReceivedValueInRange(SERVO_MIN_MICROSEC,
+                                       SERVO_MAX_MICROSEC);
     servo.writeMicroseconds(microSec);
+  } else {
+    servo.detach();
   }
 }

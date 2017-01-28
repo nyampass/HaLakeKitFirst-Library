@@ -4,9 +4,9 @@
 #define ECHO_PIN 3
 
 #ifdef USBCON
-HaLakeKitFirst kitConnector(&Serial1);
+HaLakeKitFirst kitFirst(&Serial1);
 #else
-HaLakeKitFirst kitConnector(&Serial);
+HaLakeKitFirst kitFirst(&Serial);
 #endif
 
 int sensorValue;
@@ -18,13 +18,12 @@ int sensorCm;
 const int sumupNumberOfTimes = 2;
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
   pinMode( ECHO_PIN, INPUT );
   pinMode( TRIG_PIN, OUTPUT );
 }
 
 void loop() {
-
   for (i=0; i< sumupNumberOfTimes; i++) {
     sumSensorValue += getSonarDistance();
     delay(10);
@@ -39,8 +38,7 @@ void loop() {
   } else if (outValue > 1023) {
     outValue = 1023;
   }
-
-  kitConnector.sendValue(outValue);
+  kitFirst.sendValueInRange(sensorValue, 60, 10);
 }
 
 float getSonarDistance() {

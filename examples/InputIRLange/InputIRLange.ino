@@ -2,10 +2,9 @@
 
 #define SENSOR_PIN 0
 
-HaLakeKitFirst kitConnector(&Serial);
+HaLakeKitFirst kitFirst(&Serial);
 
 int sensorValue;
-int outValue;
 
 int i;
 int sumSensorValue;
@@ -13,7 +12,7 @@ int sensorCm;
 static int sumupNumberOfTimes = 5;
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
   pinMode(SENSOR_PIN, INPUT);
 }
 
@@ -26,17 +25,7 @@ void loop() {
   sensorValue = sumSensorValue / sumupNumberOfTimes;
   sumSensorValue = 0;
 
-  //sensorCm = partValueToCm(sensorValue);
-  //outValue = map(sensorCm, 5, 30, 0, 1023);
-
-  outValue = map(sensorValue, 100, 400, 0, 1023);
-  if (outValue < 0) {
-    outValue = 0;
-  } else if (outValue > 1023) {
-    outValue = 1023;
-  }
-
-  kitConnector.sendValue(outValue);
+  kitFirst.sendValueInRange(sensorValue, 100, 400);
 }
 
 int partValueToCm(int value) {

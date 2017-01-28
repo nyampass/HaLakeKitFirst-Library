@@ -4,7 +4,7 @@
 #define ROTERY_PIN_B 9
 #define SWITCH_PIN 8
 
-HaLakeKitFirst kitConnector(&Serial);
+HaLakeKitFirst kitFirst(&Serial);
 
 volatile int roteryValue;
 
@@ -14,7 +14,7 @@ int isCountDowning;
 int valueToSend;
 
 void setup(void) {
-  kitConnector.begin();
+  kitFirst.begin();
   pinMode(ROTERY_PIN_A, INPUT_PULLUP);
   pinMode(ROTERY_PIN_B, INPUT_PULLUP);
   pinMode(SWITCH_PIN, INPUT_PULLUP);
@@ -44,8 +44,7 @@ void loop(void) {
     valueToSend --;
   }
 
-  valueToSend = constrain(valueToSend, 0, 1023);
-  kitConnector.sendValue(valueToSend);
+  valueToSend = kitFirst.sendValueInRange(valueToSend, 0, HALAKEKITFIRST_MAX_VALUE);
   delay(50);
 }
 

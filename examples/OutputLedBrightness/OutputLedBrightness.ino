@@ -1,25 +1,20 @@
 #include "HaLakeKitFirst.h"
 #define LED_PIN 10
 
-HaLakeKitFirst kitConnector(&Serial);
+HaLakeKitFirst kitFirst(&Serial);
 
-String kitStr;
-int receivedValue;
 int outValue;
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
   pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
-  kitStr = kitConnector.waitLine();
-  receivedValue = kitConnector.valueFromLine(kitStr);
-
-  if (receivedValue < 0) {
-    outValue = 0;
+  if (kitFirst.receive()) {
+    outValue = kitFirst.getReceivedValueInRange(0, 255);
   } else {
-    outValue = receivedValue / 4;
+    outValue = 0;
   }
 
   analogWrite(LED_PIN, outValue);

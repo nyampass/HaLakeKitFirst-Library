@@ -1,43 +1,50 @@
 #include "HaLakeKitFirst.h"
 
+long constrainAndMap(long value, long fromMin, long fromMax, long toMin, long toMax) {
+  long constrainedValue =
+    (fromMin < fromMax) ?
+    constrain(value, fromMin, fromMax):
+    constrain(value, fromMax, fromMin);
+  return map(constrainedValue,
+             fromMin,
+             fromMax,
+             toMin,
+             toMax);
+}
+
 HaLakeKitFirst::HaLakeKitFirst(HardwareSerial* _hardSerial) {
   hardSerial = _hardSerial;
-  breakMillis = (unsigned long) HALAKEKITFIRST_BREAK_MILLIS;
 }
 
 void HaLakeKitFirst::begin() {
   hardSerial->begin(HALAKEKITFIRST_SERIAL_SPEED);
 }
 
-void HaLakeKitFirst::setBreakMillis(unsigned long _breakMillis) {
-  breakMillis = _breakMillis;
-}
-
-void HaLakeKitFirst::sendValue(int value) {
+long HaLakeKitFirst::sendValueInRange(long value, long min, long max) {
+  long valueToSend = constrainAndMap(value,
+                                     min,
+                                     max,
+                                     0,
+                                     HALAKEKITFIRST_MAX_VALUE);
   hardSerial->print("v ");
-  hardSerial->print(value);
+  hardSerial->print(valueToSend);
   hardSerial->print("\n");
+  return valueToSend;
 }
 
-static int HaLakeKitFirst::valueFromLine(String line) {
-  int spaceIndex = line.indexOf(' ');
-  int errorValue = -1;
-  String command = line.substring(0, spaceIndex);
+long HaLakeKitFirst::getReceivedValueInRange(long min, long max) {
+  int spaceIndex = receivedString.indexOf(' ');
+  String command = receivedString.substring(0, spaceIndex);
   if (command != "v") {
-    return errorValue;
+    return min;
   }
 
-  String strValue = line.substring(spaceIndex + 1, line.length());
-  if (strValue == "0") {
-    return 0;
-  }
-
-  int intValue = strValue.toInt();
-  if (intValue == 0) {
-    return errorValue;
-  } else {
-    return intValue;
-  }
+  String strValue = receivedString.substring(spaceIndex + 1, receivedString.length());
+  return constrainAndMap(strValue.toInt(),
+                         0,
+                         HALAKEKITFIRST_MAX_VALUE,
+                         min,
+                         max);
 }
 
 void HaLakeKitFirst::clearSerialBuffer() {
@@ -47,14 +54,18 @@ void HaLakeKitFirst::clearSerialBuffer() {
   return;
 }
 
-String HaLakeKitFirst::waitLine(bool clearBuffer) {
-  unsigned long waitTill = millis() + breakMillis;
-  String receivedStr;
-  char receivedChar;
-
+bool HaLakeKitFirst::receive(unsigned long breakMillis, bool clearBuffer) {
   if (!clearBuffer) {
     clearSerialBuffer();
   }
+  receivedString = waitLine(breakMillis);
+  return receivedString.length() > 0;
+}
+
+String HaLakeKitFirst::waitLine(unsigned long breakMillis) {
+  unsigned long waitTill = millis() + breakMillis;
+  String receivedStr;
+  char receivedChar;
 
   while (receivedStr.length() == 0 && waitTill > millis()) {
     while (hardSerial->available() > 0) {

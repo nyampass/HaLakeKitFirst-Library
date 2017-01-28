@@ -1,26 +1,15 @@
 #include "HaLakeKitFirst.h"
 #define ANALOG_READ_PIN 7
 
-int receivedValue;
-int outValue;
-
-HaLakeKitFirst kitConnector(&Serial);
+HaLakeKitFirst kitFirst(&Serial);
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
 }
 
 void loop() {
-  receivedValue = analogRead(ANALOG_READ_PIN);
-
-  outValue = (receivedValue - 500) * ((float) 1023 / 500);
-  if (outValue < 0) {
-    outValue = 0;
-  } else if (outValue > 1023) {
-    outValue = 1023;
-  }
-
-  kitConnector.sendValue(outValue);
-
+  kitFirst.sendValueInRange(analogRead(ANALOG_READ_PIN),
+                            500,
+                            1000);
   delay(50);
 }

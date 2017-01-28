@@ -1,7 +1,5 @@
 #include "HaLakeKitFirst.h"
 
-#define MAX_LEVEL 9 // 0 to 9
-
 const int LEVEL_PINS[] = {
   12,
   11,
@@ -14,21 +12,18 @@ const int LEVEL_PINS[] = {
   4,
   3
 };
+const int MAX_LEVEL = sizeof(LEVEL_PINS) / sizeof(int);
 
 int currentLevel = 0;
 int targetLevel;
 int i;
 
-HaLakeKitFirst kitConnector(&Serial);
-
-String kitStr;
-int receivedValue;
-int outValue;
+HaLakeKitFirst kitFirst(&Serial);
 
 void setup() {
-  kitConnector.begin();
+  kitFirst.begin();
 
-  for (i = 0; i < MAX_LEVEL + 1; i++) {
+  for (i = 0; i < MAX_LEVEL; i++) {
     pinMode(LEVEL_PINS[i], OUTPUT);
   }
 
@@ -36,16 +31,8 @@ void setup() {
 }
 
 void loop() {
-  kitStr = kitConnector.waitLine();
-  receivedValue = kitConnector.valueFromLine(kitStr);
-
-  if (receivedValue < 0) {
-    targetLevel = 0;
-  } else {
-    targetLevel = receivedValue / 100;
-  }
-  if (targetLevel > MAX_LEVEL) {
-    targetLevel = MAX_LEVEL;
+  if (kitFirst.receive()) {
+    targetLevel = kitFirst.getReceivedValueInRange(0, MAX_LEVEL);
   }
 
   if (currentLevel != targetLevel) {
@@ -55,9 +42,9 @@ void loop() {
 }
 
 void updateDisplay(int level) {
-  for (i = 0; i < MAX_LEVEL + 1; i++) {
+  for (i = 0; i < MAX_LEVEL; i++) {
     if (level == 0) {
-      if (i==0) {
+      if (i == 0) {
         setLevelPin(i, true);
       } else {
         setLevelPin(i, false);
