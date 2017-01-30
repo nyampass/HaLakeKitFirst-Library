@@ -1,6 +1,11 @@
 # HaLakeKitFirst
 An arduino library to communicate serial in HaLakeKitFirst style.
 
+# Install
+You can install by using library manager.
+
+[Sketch] -> [Include Library] -> [Manage Libraries..] -> search "halakekitfirst" then install it.
+
 # Useage
 If you want to get some sample, see [examples](/examples) of this project.
 
