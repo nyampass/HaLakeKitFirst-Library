@@ -55,7 +55,7 @@ void HaLakeKitFirst::clearSerialBuffer() {
 }
 
 bool HaLakeKitFirst::receive(unsigned long breakMillis, bool clearBuffer) {
-  if (!clearBuffer) {
+  if (clearBuffer) {
     clearSerialBuffer();
   }
   receivedString = waitLine(breakMillis);
