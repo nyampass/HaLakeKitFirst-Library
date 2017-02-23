@@ -70,7 +70,7 @@ String HaLakeKitFirst::waitLine(unsigned long breakMillis) {
   while (receivedStr.length() == 0 && waitTill > millis()) {
     while (hardSerial->available() > 0) {
       receivedChar = (char)hardSerial->read();
-      if (receivedChar == "\n") {
+      if (receivedChar == '\n') {
         break;
       } else {
         receivedStr.concat(receivedChar);
